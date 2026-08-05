@@ -1,0 +1,14 @@
+{
+  "status": "unbundlable",
+  "entries": [
+    {
+      "path": "lib/src/entrypoint.js",
+      "status": "unbundlable",
+      "reason": "ignored-dynamic-import: Importing \"supports-color\" was allowed even though it could not be resolved because dynamic import failures appear to be handled here:",
+      "warnings": [
+        "ignored-dynamic-import: Importing \"supports-color\" was allowed even though it could not be resolved because dynamic import failures appear to be handled here:",
+        "indirect-require: Indirect calls to \"require\" will not be bundled"
+      ]
+    }
+  ]
+}
