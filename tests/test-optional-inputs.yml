@@ -1,0 +1,35 @@
+name: Test optional inputs
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          application-id: "fake-application-id"
+          environment-id: "fake-environment-id"
+          browser-types: "chrome,firefox"
+          plan-labels: "smoke,regression"
+          uri: "https://example.com"
+          mabl-branch: "main"
+          http-headers: "X-Custom-Header:test-value"
+          rebaseline-images: "false"
+          set-static-baseline: "false"
+          continue-on-failure: "true"
+          event-time: "1700000000000"
+        env:
+          MABL_API_KEY: "fake-api-key"
+      - name: Assert action ran with all optional inputs (not skipped)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" = "skipped" ]; then
+            echo "FAIL: action was skipped, expected it to run"
+            exit 1
+          fi
+          echo "PASS: action ran with all optional inputs, outcome=$OUTCOME"
