@@ -9,6 +9,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
 | v1.14 | [`v1.14`](https://github.com/chainguard-actions/mablhq-github-run-tests-action/tree/v1.14) | [`3e15a5d`](https://github.com/mablhq/github-run-tests-action/commit/3e15a5dd7461b96399aaa1d261535ca18e688226) |
+| v1.15 | [`v1.15`](https://github.com/chainguard-actions/mablhq-github-run-tests-action/tree/v1.15) | [`43061c6`](https://github.com/mablhq/github-run-tests-action/commit/43061c6f3eeabd3dbd2c6c045c8e307b231f4427) |
 
 ## Privacy
 
