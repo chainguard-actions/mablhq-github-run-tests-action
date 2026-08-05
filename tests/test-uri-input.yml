@@ -1,0 +1,30 @@
+name: Test deprecated uri input accepted
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Run action with deprecated uri input (expect failure at API key check)
+        id: action
+        uses: .
+        with:
+          application-id: fake-app-id
+          uri: 'https://example.com'
+          continue-on-failure: 'true'
+        continue-on-error: true
+        env:
+          MABL_API_KEY: ""
+
+      - name: Assert action failed due to missing API key (uri input was accepted)
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+        run: |
+          echo "outcome: $OUTCOME"
+          if [ "$OUTCOME" != "failure" ]; then
+            echo "FAIL: expected action to fail when MABL_API_KEY is not set, but got outcome=$OUTCOME"
+            exit 1
+          fi
+          echo "PASS: action correctly failed at API key check after accepting deprecated uri input"
