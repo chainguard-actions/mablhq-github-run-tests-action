@@ -1,6 +1,16 @@
 {
   "owner": "mablhq",
   "repo": "github-run-tests-action",
-  "version": "",
-  "url": "https://github.com/mablhq/github-run-tests-action"
+  "version": "v1.13.0",
+  "commit_sha": "84245308209ba67c4eb87382a1e496bf88ac7e4a",
+  "url": "https://github.com/mablhq/github-run-tests-action",
+  "policy_sha": "d636be7e43ef829af6e853da6b3c7566db9f72fe",
+  "test_policy_sha": "843adf9e4b8f85d0c08b27b9d0b09dd094b54702",
+  "test_agent_version": "2",
+  "harden_agent_version": "2",
+  "node_artifact": {
+    "gcs_uri": "gs://prod-actions-node-artifacts/node-artifacts/mablhq/github-run-tests-action/v1.13.0/sha256-9f342da298082579798810781948063c9b4499051e2541f61762b272ee11e64c.tar.gz",
+    "sha256": "9f342da298082579798810781948063c9b4499051e2541f61762b272ee11e64c",
+    "size_bytes": 2070009
+  }
 }
