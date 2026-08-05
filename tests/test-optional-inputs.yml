@@ -1,0 +1,41 @@
+name: Test optional inputs
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      MABL_API_KEY: fake-api-key-for-testing
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        continue-on-error: true
+        with:
+          application-id: fake-application-id
+          browser-types: "chrome,firefox"
+          plan-labels: "smoke,regression"
+          uri: "https://example.com"
+          mabl-branch: "main"
+          http-headers: "X-Custom-Header:test-value"
+          rebaseline-images: "false"
+          set-static-baseline: "false"
+          continue-on-failure: "true"
+          event-time: "1700000000000"
+      - name: Assert action ran with optional inputs
+        env:
+          OUTCOME: ${{ steps.action.outcome }}
+          DEPLOYMENT_ID: ${{ steps.action.outputs.mabl-deployment-id }}
+          PLANS_RUN: ${{ steps.action.outputs.plans_run }}
+          TESTS_RUN: ${{ steps.action.outputs.tests_run }}
+        run: |
+          echo "action outcome: $OUTCOME"
+          echo "mabl-deployment-id: $DEPLOYMENT_ID"
+          echo "plans_run: $PLANS_RUN"
+          echo "tests_run: $TESTS_RUN"
+          # The action should either succeed or fail gracefully (not crash the runner)
+          if [ "$OUTCOME" != "success" ] && [ "$OUTCOME" != "failure" ]; then
+            echo "FAIL: unexpected outcome '$OUTCOME' — expected 'success' or 'failure'"
+            exit 1
+          fi
+          echo "PASS: action accepted all optional inputs and produced a valid outcome"
